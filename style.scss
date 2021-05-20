@@ -1,0 +1,996 @@
+@import './variables';
+@import './mixin';
+@import './button';
+@import './helpers';
+html {
+    font-size: 62.5%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $primary-font-family;
+    color: $primary-color;
+    line-height: 1.4;
+    font-weight: 400;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    object-fit: cover;
+    background-position: center;
+}
+
+.wrapper {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.container {
+    max-width: 1180px;
+    width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 4rem;
+    font-weight: 700;
+    color: $black-color;
+    font-family: $primary-font-family;
+    &__text {
+        color: $light-yellow-color;
+    }
+    @include md {
+        font-size: 2.6rem;
+    }
+    @include sm {
+        font-size: 2.2rem;
+    }
+    @include xs {
+        font-size: 1.4rem;
+    }
+    @include xls {
+        font-size: 2rem;
+    }
+}
+
+.btn {
+    @include base-btn;
+    margin: 0 1rem;
+    transition: all 0.25s linear;
+    &:hover {
+        color: $light-yellow-color;
+    }
+    @include md {
+        font-size: 1.3rem;
+        padding: 1rem 2rem;
+    }
+    @include sm {
+        font-size: 1rem;
+        padding: 1rem 1.6rem;
+    }
+    @include xls {
+        font-size: 0.8rem;
+        padding: 0.6rem 0.8rem;
+    }
+}
+
+.btn--border {
+    @include btn-border;
+}
+
+.btn--rounded {
+    @include btn-rounded;
+}
+
+.has--shadow {
+    @include has-shadow;
+}
+
+.has--shadow:hover {
+    color: $white-color;
+}
+
+.btn--color {
+    background-color: $light-yellow-color;
+}
+
+
+/* Header */
+
+.header {
+    padding-top: 4rem;
+    @include lg {
+        padding-top: 2rem;
+    }
+    &__inner {
+        @include display-flex(row, space-between, center, wrap);
+        @include md {
+            flex-direction: column;
+        }
+        @include xss {
+            flex-direction: row;
+        }
+    }
+    /* Header navigation */
+    &__menu {
+        @include md {
+            margin-top: 1.6rem;
+        }
+        @include sm {
+            margin-top: 1.4rem;
+        }
+        @include xss {
+            position: fixed;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            height: 100%;
+            z-index: 1;
+            transition: 1s ease-in-out;
+        }
+        &-list {
+            @include display-flex(row, center, center, nowrap);
+            @include xss {
+                @include display-flex(column, center, center, wrap);
+            }
+        }
+        &-item {
+            margin-left: 4rem;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            @include sm {
+                margin-left: 3rem;
+            }
+            @include xss {
+                width: 50%;
+                margin-top: 4rem;
+                padding-left: calc(25% - 2rem);
+            }
+            &:last-child {
+                margin-left: 5rem;
+                a {
+                    @include xss {
+                        border: none;
+                        padding-left: 2rem;
+                    }
+                }
+                @include xss {
+                    margin-left: 1.4rem;
+                }
+            }
+            &:not(:last-child) .header__menu-link:before {
+                position: absolute;
+                content: "";
+                top: 115%;
+                right: 0;
+                left: auto;
+                width: 0;
+                height: 2px;
+                transform: translateY(-115%);
+                background-color: $black-color;
+                transition: all 0.25s linear;
+            }
+            &:hover {
+                .header__menu-link {
+                    color: $light-yellow-color;
+                    &::before {
+                        width: 100%;
+                        right: auto;
+                        left: 0;
+                    }
+                }
+            }
+        }
+        &-link {
+            position: relative;
+            font-size: 1.6rem;
+            color: $primary-color;
+            font-family: $primary-font-family;
+            transition: all 0.25s linear;
+            @include md {
+                font-size: 1.4rem;
+            }
+            @include sm {
+                font-size: 1rem;
+            }
+            @include xss {
+                color: $white-color;
+            }
+        }
+        &-hidden {
+            display: none;
+            z-index: 2;
+            position: absolute;
+            right: 6%;
+            transform: translateX(-6%);
+            cursor: pointer;
+            @include xss {
+                display: block;
+                &__icon {
+                    color: $black-color;
+                    &-close {
+                        visibility: hidden;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* Banner */
+
+.banner {
+    padding-top: 15rem;
+    padding-bottom: 15rem;
+    margin: 0 auto;
+    @include text-center();
+    max-width: 80rem;
+    width: 100%;
+    @include md {
+        padding-top: 8rem;
+        padding-bottom: 8rem;
+    }
+    @include sm {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+    @include xs {
+        padding-top: 3rem;
+        padding-bottom: 2rem;
+    }
+    @include xls {
+        padding-top: 2rem;
+        padding-bottom: 1rem;
+    }
+    &__heading {
+        font-size: 6rem;
+        font-weight: 700;
+        margin-bottom: 4rem;
+        @include md {
+            font-size: 4rem;
+        }
+        @include sm {
+            font-size: 3.2rem;
+        }
+        @include xs {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        @include xls {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+    }
+    &__description {
+        font-size: 1.8rem;
+        font-weight: 200;
+        margin-bottom: 4rem;
+        line-height: 1.5;
+        @include md {
+            font-size: 1.4rem;
+        }
+        @include sm {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+        }
+        @include xs {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+    }
+    &__buttons {
+        @include display-flex(row, center, stretch, nowrap);
+    }
+}
+
+
+/* Features */
+
+.features {
+    &__list {
+        @include display-grid(4, 3rem);
+        @include sm {
+            @include display-grid(2, auto)
+        }
+        @include xss {
+            @include display-grid(1, auto);
+        }
+    }
+    &__item {
+        padding: 2.5rem;
+        background-color: $white-color;
+        border-radius: 2rem;
+        cursor: pointer;
+        @include sm {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        &:first-child {
+            box-shadow: 0 20px 35px -5px rgba(255, 151, 195, 0.25);
+        }
+        &:nth-child(2) {
+            box-shadow: 0 20px 35px -5px rgba(255, 112, 109, 0.25);
+        }
+        &:nth-last-child(2) {
+            box-shadow: 0 20px 35px -5px rgba(133, 152, 255, 0.25);
+        }
+        &:last-child {
+            box-shadow: 0 20px 35px -5px rgba(255, 200, 122, 0.25);
+        }
+    }
+    &__image {
+        border-radius: inherit;
+        margin-bottom: 4rem;
+        @include sm {
+            margin-bottom: 2rem;
+            width: 60%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @include xs {
+            margin-bottom: 1rem;
+            width: 50%;
+        }
+    }
+    &__name,
+    &__details {
+        white-space: nowrap;
+        @include clamp(1);
+        @include text-center();
+    }
+    &__name {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 2.5rem;
+        @include lg {
+            font-size: 1rem;
+        }
+        @include sm {
+            @include text-center();
+            font-size: 1.2rem;
+        }
+        @include xs {
+            font-size: 1rem;
+        }
+    }
+    &__details {
+        font-size: 1.2rem;
+        color: $light-white-color;
+        margin-top: auto;
+        @include lg {
+            font-size: 0.6rem;
+        }
+        @include sm {
+            @include text-center();
+            font-size: 1rem;
+        }
+        @include xs {
+            font-size: 0.8rem;
+        }
+        i {
+            margin-left: 1rem;
+        }
+    }
+}
+
+
+/* Activities */
+
+.activities {
+    margin-top: 16rem;
+    @include md {
+        margin-top: 8rem;
+    }
+    @include sm {
+        margin-top: 4rem;
+    }
+    @include xls {
+        margin-top: 2rem;
+    }
+    &__item {
+        @include display-flex(row, normal, center, nowrap);
+        margin-bottom: 15rem;
+        @include md {
+            margin-bottom: 6rem;
+        }
+        @include sm {
+            margin-bottom: 4rem;
+        }
+        @include xs {
+            @include display-flex(column, center, center, nowrap);
+        }
+        @include xls {
+            margin-bottom: 2rem;
+        }
+        &:nth-child(odd) .activities__info {
+            padding-left: 10rem;
+            @include md {
+                padding-left: 4rem;
+            }
+            @include sm {
+                padding-left: 3rem;
+            }
+            @include xls {
+                padding-left: 2.4rem;
+            }
+        }
+        &:nth-child(even) {
+            flex-direction: row-reverse;
+            @include xs {
+                flex-direction: column;
+            }
+            .activities__info {
+                padding-right: 10rem;
+                @include md {
+                    padding-right: 4rem;
+                }
+                @include sm {
+                    padding-right: 3rem;
+                }
+                @include xls {
+                    padding-right: 2.4rem;
+                }
+            }
+        }
+        &:nth-child(1) {
+            .activities {
+                &-intro__item {
+                    text-decoration: underline;
+                }
+                &__info {
+                    a {
+                        transition: color 0.25s linear;
+                        &:hover {
+                            color: $white-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &__image,
+    &__info {
+        width: 50%;
+        a {
+            padding: 1rem 3.2rem;
+            @include md {
+                padding: 0.8rem 3rem;
+            }
+        }
+    }
+    &__image {
+        @include xs {
+            width: 80%;
+        }
+        @include xls {
+            width: 100%;
+        }
+    }
+    &__info {
+        @include xs {
+            width: 100%;
+            padding-left: 2rem;
+        }
+        a {
+            width: fit-content;
+            display: block;
+            @include xs {
+                padding: 1rem 3.2rem;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            @include xls {
+                padding: 0.8rem 2.4rem;
+            }
+        }
+    }
+    &__title {
+        font-size: 2.6rem;
+        font-weight: 600;
+        margin-bottom: 2.2rem;
+        line-height: 1.2;
+        @include md {
+            font-size: 2rem;
+            margin-bottom: 1.8rem;
+            line-height: 1;
+        }
+        @include sm {
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+        }
+        @include xs {
+            font-size: 1.6rem;
+            margin-bottom: 1.8rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+        @include xls {
+            font-size: 1rem;
+            height: 1rem;
+        }
+    }
+    &__description {
+        font-weight: 300;
+        font-size: 1.4rem;
+        line-height: 1.4;
+        margin-bottom: 3rem;
+        color: $light-white-color;
+        @include clamp(3);
+        @include md {
+            font-size: 1rem;
+            line-height: 1;
+            margin-bottom: 2rem;
+        }
+        @include sm {
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        @include xs {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+        @include xls {
+            font-size: 0.6rem;
+        }
+    }
+    &-intro {
+        &__list {
+            margin-bottom: 4rem;
+            @include md {
+                margin-bottom: 3.2rem;
+            }
+            @include sm {
+                margin-bottom: 3rem;
+            }
+            @include xs {
+                margin-bottom: 2rem;
+                text-align: center;
+            }
+            @include xls {
+                margin-bottom: 2.4rem;
+            }
+        }
+        &__item {
+            margin-bottom: 3rem;
+            font-weight: 600;
+            width: 70%;
+            @include md {
+                margin-bottom: 2.6rem;
+            }
+            @include sm {
+                margin-bottom: 2.4rem;
+            }
+            @include xs {
+                margin-bottom: 2rem;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            @include xls {
+                font-size: 0.7rem;
+            }
+        }
+        &__circle {
+            text-decoration: none;
+            position: relative;
+            padding-left: 2rem;
+            &::before {
+                position: absolute;
+                content: "";
+                width: 1.8rem;
+                height: 1.8rem;
+                border-radius: 4rem;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+                @include md {
+                    width: 1.2rem;
+                    height: 1.2rem;
+                }
+                @include xs {
+                    width: 1.4rem;
+                    height: 1.4rem;
+                }
+                @include xls {
+                    width: 1rem;
+                    height: 1rem;
+                }
+            }
+            &:nth-child(1):before {
+                background-color: rgb(254, 107, 222);
+            }
+            &:nth-child(2):before {
+                background-color: rgb(141, 252, 62);
+            }
+            &:nth-child(3):before {
+                background-color: #00aefd;
+            }
+            &:nth-child(4)::before {
+                background-color: rgb(252, 139, 156);
+            }
+        }
+    }
+    /* Third Item */
+    &-best__list {
+        @include display-flex( row, space-between, flex-start, wrap);
+    }
+    &-best__item {
+        width: calc(50% - 6rem);
+        margin-right: 6rem;
+        @include md {
+            width: calc(50% - 2rem);
+            margin-right: 2rem;
+        }
+        @include xs {
+            width: calc(50% - 4rem);
+            margin-right: 4rem;
+        }
+        @include xls {
+            width: calc(50% - 1rem);
+            margin-right: 1rem;
+        }
+    }
+    &-best__icon {
+        width: 100%;
+        height: 4rem;
+        border-radius: 4px;
+        font-size: 2rem;
+        z-index: 1;
+        text-align: center;
+        @include md {
+            width: 3rem;
+            height: 3rem;
+            font-size: 1.5rem;
+        }
+        &--blue {
+            color: #ffa400;
+        }
+        &--purple {
+            color: purple;
+        }
+        &--green {
+            color: #07a787;
+        }
+        &--red {
+            color: #ff7870;
+        }
+    }
+    &-best__title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        line-height: 1.3;
+        @include clamp(3);
+        @include md {
+            font-size: 0.7rem;
+            margin-bottom: 1.6rem;
+        }
+        @include sm {
+            margin-bottom: 1.2rem;
+        }
+        @include xs {
+            font-size: 0.8rem;
+        }
+        @include xss {
+            font-size: 0.5rem;
+        }
+        @include xls {
+            font-size: 0.6rem;
+            margin-bottom: 1rem;
+        }
+    }
+    &-best__desc {
+        font-weight: 300;
+        @include sm {
+            font-size: 0.6rem;
+        }
+        @include xls {
+            font-size: 0.4rem;
+        }
+    }
+    .text-clamp {
+        margin-bottom: 2rem;
+        line-height: 1.3;
+        @include clamp(2);
+        @include md {
+            margin-bottom: 1.6rem;
+        }
+    }
+}
+
+
+/* Partner */
+
+.partner {
+    margin-bottom: 19rem;
+    @include md {
+        margin-bottom: 6rem;
+    }
+    @include xss {
+        margin-bottom: 3.2rem;
+    }
+    .container {
+        &__partner {
+            max-width: 70rem;
+            width: 100%;
+            @include text-center();
+            margin: 0 auto;
+            @include sm {
+                max-width: 50rem;
+            }
+        }
+    }
+    &__title {
+        font-weight: 600;
+        font-size: 1.8rem;
+        padding-bottom: 7rem;
+        margin-bottom: 7rem;
+        border-bottom: 1px solid $black-color;
+        @include sm {
+            font-size: 1.4rem;
+            padding-bottom: 2.4rem;
+            margin-bottom: 2.4rem;
+        }
+    }
+    &__list {
+        @include display-flex(row, space-evenly, center, nowrap);
+        @include sm {
+            @include display-flex(column, center, center, wrap);
+        }
+    }
+    &__item {
+        margin-bottom: 1.4rem;
+    }
+}
+
+
+/* Connect */
+
+.connect {
+    margin-bottom: 19rem;
+    @include md {
+        margin-bottom: 6rem;
+    }
+    &__container {
+        @include text-center();
+    }
+    &__title {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 5rem;
+        @include sm {
+            font-size: 1.6rem;
+            margin-bottom: 3rem;
+        }
+        @include xss {
+            font-size: 1.2rem;
+            margin-bottom: 2.4rem;
+        }
+    }
+    &__notice {
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin-bottom: 7rem;
+        @include sm {
+            font-size: 1.4rem;
+            margin-bottom: 4rem;
+        }
+        span {
+            color: $light-yellow-color;
+        }
+    }
+    &__list {
+        @include display-grid(4, 2rem)
+    }
+}
+
+
+/* Subscribe */
+
+.subscribe {
+    margin-bottom: 5rem;
+    @include md {
+        margin-bottom: 3rem;
+    }
+    @include sm {
+        margin-bottom: 2rem;
+    }
+    &__container {
+        @include display-flex(row, space-between, normal, nowrap);
+        justify-items: stretch;
+        padding-bottom: 8rem;
+        border-bottom: 3px solid $black-color;
+        @include md {
+            padding-bottom: 4rem;
+        }
+        @include sm {
+            padding-bottom: 2rem;
+        }
+    }
+    &__title {
+        font-size: 1.6rem;
+        font-weight: 600;
+        width: calc(50% - 2rem);
+        margin-right: 2rem;
+        @include md {
+            font-size: 1.4rem;
+        }
+        @include sm {
+            font-size: 1rem;
+        }
+        @include xs {
+            font-size: 0.8rem;
+        }
+    }
+    &__info {
+        width: 50%;
+    }
+    &__form {
+        @include display-flex(row, space-between, stretch, nowrap);
+        padding: 2rem;
+        margin-bottom: 3.5rem;
+        background-color: $light-white-color;
+        @include md {
+            padding: 1.4rem;
+            margin-bottom: 2.4rem;
+        }
+        @include sm {
+            padding: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        @include xs {
+            padding: 0.4rem;
+            margin-bottom: 1.4rem;
+        }
+    }
+    &__input {
+        border: 0;
+        outline: none;
+        background-color: transparent;
+        font-size: 1.4rem;
+        font-family: $primary-font-family;
+        flex-grow: 1;
+        padding: 0 1.5rem 0 0;
+        @include sm {
+            font-size: 1rem;
+        }
+        @include xs {
+            font-size: 0.8rem;
+        }
+        @include xls {
+            font-size: 0.5rem;
+        }
+    }
+    &__button {
+        background-color: transparent;
+        border: 0;
+        outline: none;
+        cursor: pointer;
+        font-size: 1.4rem;
+        font-family: $primary-font-family;
+        user-select: none;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        @include md {
+            font-size: 1.2rem;
+        }
+        @include sm {
+            font-size: 1rem;
+        }
+        @include xs {
+            font-size: 0.8rem;
+        }
+        @include xls {
+            font-size: 0.4rem;
+        }
+    }
+    &__social {
+        @include display-flex(row, flex-start, normal, nowrap);
+        i {
+            margin-left: 4rem;
+            font-size: 2rem;
+            @include md {
+                margin-left: 2.4rem;
+                font-size: 1.6rem;
+            }
+            @include sm {
+                margin-left: 2rem;
+                font-size: 1.2rem;
+            }
+            @include xss {
+                margin-left: 1.2rem;
+            }
+        }
+    }
+}
+
+
+/* Footer */
+
+.footer {
+    &__container {
+        @include display-flex(row, space-between, flex-start, nowrap);
+        @include xls {
+            @include display-flex(column, center, center, nowrap);
+        }
+    }
+    &__item {
+        width: 100%;
+        text-align: center;
+        &:nth-child(1) {
+            margin-right: 8rem;
+            @include md {
+                margin-right: 2rem;
+            }
+            @include sm {
+                margin-right: 1rem;
+            }
+            @include xls {
+                margin: 1rem 0;
+            }
+        }
+        &:nth-child(2) {
+            margin-right: 10rem;
+            @include md {
+                margin-right: 2rem;
+            }
+            @include sm {
+                margin-right: 1rem;
+            }
+            @include xls {
+                margin: 1rem 0;
+            }
+        }
+        &:nth-child(3) {
+            margin-right: 12rem;
+            @include md {
+                margin-right: 2rem;
+            }
+            @include sm {
+                margin-right: 1rem;
+            }
+            @include xls {
+                margin: 1rem 0;
+            }
+        }
+    }
+    &__link {
+        color: $primary-color;
+        font-size: 1.4rem;
+        display: block;
+        margin-bottom: 3rem;
+        width: fit-content;
+        transition: all 0.25s linear;
+        @include md {
+            font-size: 1.2rem;
+            margin-bottom: 2.4rem;
+        }
+        @include sm {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+        @include xs {
+            font-size: 0.6rem;
+            margin-left: 40%;
+        }
+        &:hover {
+            color: $light-yellow-color;
+        }
+    }
+}

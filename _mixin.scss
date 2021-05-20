@@ -1,0 +1,26 @@
+@mixin display-flex($direction, $justify, $align, $wrap) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+    flex-wrap: $wrap;
+}
+
+@mixin display-grid($repeat, $gap) {
+    display: grid;
+    grid-template-columns: repeat($repeat, 1fr);
+    grid-column-gap: $gap;
+}
+
+@mixin clamp($line) {
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@mixin text-center {
+    text-align: center;
+}
